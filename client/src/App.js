@@ -1,14 +1,53 @@
 import React, { Component } from 'react';
+import styled, { ThemeProvider } from 'styled-components';
+import Typography from 'typography';
+import { TypographyStyle, GoogleFont } from 'react-typography';
+
+import { theme } from './styles/theme';
 
 class App extends Component {
+  state = {
+    type: { ...theme.type }
+  };
+
   componentDidMount() {
-    fetch('/api/generated_jokes')
-      .then(res => res.json())
-      .then(body => console.log(body));
+    window.addEventListener('resize', this.updateType);
   }
 
+  componentWillUnmount() {
+    window.addEventListener('resize', this.updateType);
+  }
+
+  updateType = () => {
+    if (window.matchMedia('(max-width: 1000px)').matches) {
+      this.setState({
+        type: {
+          ...this.state.type,
+          scaleRatio: 2.6
+        }
+      });
+    } else {
+      this.setState({
+        type: {
+          ...this.state.type,
+          scaleRatio: theme.type.scaleRatio
+        }
+      });
+    }
+  };
+
   render() {
-    return <main />;
+    const { type } = this.state;
+    const typography = new Typography(type);
+    return (
+      <ThemeProvider theme={theme}>
+        <>
+          <TypographyStyle typography={typography} />
+          <GoogleFont typography={typography} />
+          <main />
+        </>
+      </ThemeProvider>
+    );
   }
 }
 
