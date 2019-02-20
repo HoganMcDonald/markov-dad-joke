@@ -16,7 +16,6 @@ namespace :jokes do
         body = JSON.parse response.body
         @last_page = body["total_pages"]
         
-        # save the jokes
         puts "downloading page #{body["current_page"]} of #{@last_page}"
 
         for joke in body["results"]
