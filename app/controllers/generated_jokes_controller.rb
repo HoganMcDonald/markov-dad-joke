@@ -1,0 +1,45 @@
+class GeneratedJokesController < ApplicationController
+  before_action :set_generated_joke, only: [:update]
+
+  def index
+    @generated_jokes = GeneratedJoke.all
+
+    render json: @generated_jokes
+  end
+
+  # TODO
+  def show
+    # generate on the fly
+    render json: @generated_joke
+  end
+
+  def create
+    # if this joke has already been generated, increment the score
+    if @generated_joke = GeneratedJoke.find_by(generated_joke_params["joke"])
+      @generated_joke.increment(:score)
+    else
+      @generated_joke = GeneratedJoke.new(generated_joke_params)
+    end
+
+    if @generated_joke.save
+      render json: @generated_joke, status: :created
+    else
+      render json: @generated_joke.errors, status: :unprocessable_entity
+    end
+  end
+
+  # increment score
+  def update
+    @generated_joke.increment!(:score)
+    render json: @generated_joke
+  end
+
+  private
+    def set_generated_joke
+      @generated_joke = GeneratedJoke.find(params[:id])
+    end
+
+    def generated_joke_params
+      params.require(:joke)
+    end
+end
