@@ -3,6 +3,7 @@ require 'net/http'
 namespace :jokes do
   desc 'Fetches jokes from https://icanhazdadjoke.com and stores in db.'
   task download: :environment do
+    puts 'Fetching dad jokes from icanhazdadjoke.com'
     @last_page = 999
     def fetch_jokes previous_page=0
       unless previous_page >= @last_page

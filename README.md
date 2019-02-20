@@ -22,14 +22,18 @@ bundle install
 # create the rails databases
 rails db:setup
 
-# download available dad jokes from https://icanhazdadjoke.com
-rake jokes:download
-
 # navigate to client app
 cd client
 
 # install react dependencies
 yarn install
+```
+
+jokes can be fetched manually from https://icanhazdadjoke.com by invoking:
+
+```
+# download available dad jokes
+rake jokes:download
 ```
 
 **Run**:
