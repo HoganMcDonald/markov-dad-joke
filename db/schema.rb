@@ -10,10 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_20_031316) do
+ActiveRecord::Schema.define(version: 2019_02_20_033245) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "generated_jokes", force: :cascade do |t|
+    t.string "joke"
+    t.integer "score"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "source_jokes", force: :cascade do |t|
     t.string "joke"
