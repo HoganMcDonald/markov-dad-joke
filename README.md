@@ -1,24 +1,30 @@
-# README
+# Markov Dad Joke Generator
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Dev Setup
 
-Things you may want to cover:
+**Requirements**:
 
-* Ruby version
+- ruby 2.5.3 (if using rvm: `rvm use`)
+- rails `gem install rails`
+- yarn `brew install yarn`
+- node (if using nvm `nvm use`)
 
-* System dependencies
+**Setup**:
 
-* Configuration
+```
+# install rails gems
+bundle install
 
-* Database creation
+# create the rails databases
+rails db:setup
 
-* Database initialization
+# navigate to client app
+cd client
 
-* How to run the test suite
+# install react dependencies
+yarn install
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+**Run**:
 
-* Deployment instructions
-
-* ...
+in one terminal window run: `rails s`. In another, run `cd client && yarn start`
