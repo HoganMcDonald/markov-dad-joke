@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 import Joke from './Joke';
+import { withGeneratedJokes } from '../util/withGeneratedJokes';
 
 const Container = styled.div`
   width: 100%;
   height: 100%;
   border-radius: 8px;
   background-color: ${({ theme }) => theme.colors.fg};
-  overflowy: scroll;
+  overflow-y: scroll;
   padding: 1rem;
 `;
 
@@ -16,25 +17,17 @@ const Heading = styled.h2`
   color: ${({ theme }) => theme.colors.accent};
 `;
 
-const PopularJokes = () => {
-  const [data, setData] = useState({ jokes: [] });
-  const fetchJokes = async () => {
-    const result = await fetch('/api/generated_jokes');
-    const jokes = await result.json();
-    setData({ jokes });
-  };
-  useEffect(() => {
-    fetchJokes();
-  }, []);
-
+const PopularJokes = ({ generatedJokes }) => {
   return (
     <Container>
       <Heading>Popular Jokes</Heading>
-      {data.jokes.map((joke, i) => (
-        <Joke joke={joke} key={i} />
-      ))}
+      {generatedJokes.jokes
+        .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+        .map((joke, i) => (
+          <Joke joke={joke} key={i} />
+        ))}
     </Container>
   );
 };
 
-export default PopularJokes;
+export default withGeneratedJokes(PopularJokes);

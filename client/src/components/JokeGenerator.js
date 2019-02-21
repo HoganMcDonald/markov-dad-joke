@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
+import { withGeneratedJokes } from '../util/withGeneratedJokes';
+
 const ContentWrapper = styled.div`
   padding: 2rem;
 `;
@@ -62,7 +64,7 @@ const SaveButton = styled(GenerateButton)`
   }
 `;
 
-const JokeGenerator = () => {
+const JokeGenerator = ({ generatedJokes }) => {
   const [data, setData] = useState({ joke: '' });
   const [generating, setGenerating] = useState(false);
 
@@ -89,6 +91,7 @@ const JokeGenerator = () => {
           },
           body: JSON.stringify(data)
         });
+        await generatedJokes.fetchJokes();
       } else {
         alert('First, generate a joke.');
       }
@@ -127,4 +130,4 @@ const JokeGenerator = () => {
   );
 };
 
-export default JokeGenerator;
+export default withGeneratedJokes(JokeGenerator);

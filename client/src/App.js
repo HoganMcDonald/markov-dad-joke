@@ -6,6 +6,7 @@ import { TypographyStyle, GoogleFont } from 'react-typography';
 import { theme } from './styles/theme';
 import Layout from './components/Layout';
 import JokeGenerator from './components/JokeGenerator';
+import { GeneratedJokesProvider } from '../src/util/withGeneratedJokes';
 
 class App extends Component {
   state = {
@@ -42,15 +43,17 @@ class App extends Component {
     const { type } = this.state;
     const typography = new Typography(type);
     return (
-      <ThemeProvider theme={theme}>
-        <>
-          <TypographyStyle typography={typography} />
-          <GoogleFont typography={typography} />
-          <Layout>
-            <JokeGenerator />
-          </Layout>
-        </>
-      </ThemeProvider>
+      <GeneratedJokesProvider>
+        <ThemeProvider theme={theme}>
+          <>
+            <TypographyStyle typography={typography} />
+            <GoogleFont typography={typography} />
+            <Layout>
+              <JokeGenerator />
+            </Layout>
+          </>
+        </ThemeProvider>
+      </GeneratedJokesProvider>
     );
   }
 }
