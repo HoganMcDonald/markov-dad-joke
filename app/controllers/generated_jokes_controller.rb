@@ -7,10 +7,10 @@ class GeneratedJokesController < ApplicationController
     render json: @generated_jokes
   end
 
-  # TODO
   def show
-    # generate on the fly
-    render json: @generated_joke
+    model = MarkovChain.new SourceJoke.all
+    @generated_joke = model.generate_joke
+    render json: { joke: @generated_joke}
   end
 
   def create
