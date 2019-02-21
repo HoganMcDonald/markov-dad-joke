@@ -1,6 +1,8 @@
 import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 
+import PopularJokes from '../components/PopularJokes';
+
 const Main = styled.main`
   display: grid;
   grid-template-columns: auto 18rem;
@@ -22,6 +24,7 @@ const SideBar = styled.aside`
   height: 100%;
   width: 100%;
   background-color: ${({ theme }) => theme.colors.bg};
+  padding: 1.5rem;
 `;
 
 export default class Layout extends PureComponent {
@@ -29,7 +32,9 @@ export default class Layout extends PureComponent {
     return (
       <Main>
         <Content>{this.props.children}</Content>
-        <SideBar />
+        <SideBar>
+          <PopularJokes />
+        </SideBar>
       </Main>
     );
   }
