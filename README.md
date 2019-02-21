@@ -4,6 +4,8 @@
 
 This app is built as a rails api with a react front end. Jokes are sourced from https://icanhazdadjoke.com and stored in a database. They are used for constructing markov chains on the fly. The code for downloading the jokes is found in `/lib/tasks/download_dad_jokes.rake`.
 
+The markov chain itself can be found it `/lib/markov_chain.rb`.
+
 ## Dev Setup
 
 **Requirements**:
