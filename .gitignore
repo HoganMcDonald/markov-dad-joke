@@ -25,3 +25,4 @@
 .DS_Store
 public/
 !/client/public
+node_modules/
