@@ -15,10 +15,10 @@ class GeneratedJokesController < ApplicationController
 
   def create
     # if this joke has already been generated, increment the score
-    if @generated_joke = GeneratedJoke.find_by(generated_joke_params["joke"])
+    if @generated_joke = GeneratedJoke.find_by(joke: params["joke"])
       @generated_joke.increment(:score)
     else
-      @generated_joke = GeneratedJoke.new(generated_joke_params)
+      @generated_joke = GeneratedJoke.new(joke: params["joke"])
     end
 
     if @generated_joke.save

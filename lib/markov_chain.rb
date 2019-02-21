@@ -9,12 +9,12 @@ class MarkovChain
     @jokes.each do |joke|
       words = joke.joke.split
       words.each_with_index do |word, i|
-        add(word, words[i+1]) if i < words.size - 1
+        add_word(word, words[i+1]) if i < words.size - 1
       end
     end
   end
 
-  def add(word, next_word)
+  def add_word(word, next_word)
     @words[word] = Hash.new(0) unless @words[word].present?
     @words[word][next_word] += 1
   end
@@ -23,6 +23,7 @@ class MarkovChain
     # First word of a randomly selected joke
     prev_word = @jokes.sample.joke.split[0] unless prev_word.present?
 
+    # use random number between sum and 0 for 
     sum = @words[prev_word].reduce(0) {|sum, word| sum += word[1]}
     random = rand(sum)+1
 
@@ -31,7 +32,6 @@ class MarkovChain
       sum <= random
     end.first
 
-    puts [".", "!"].include? next_word[-1]
     if [".", "!"].include? next_word[-1]
       joke << next_word
       return joke.join ' '

@@ -68,16 +68,39 @@ const JokeGenerator = () => {
 
   const generateJoke = async () => {
     if (generating) {
-      const result = await fetch('/api/generate_joke');
-      const joke = await result.json();
-      setData(joke);
+      try {
+        const result = await fetch('/api/generate_joke');
+        const joke = await result.json();
+        setData(joke);
+      } catch (err) {
+        alert('Unable to generate new joke.');
+      }
       setGenerating(false);
+    }
+  };
+
+  const saveJoke = async () => {
+    try {
+      if (data.joke) {
+        await fetch('/api/generated_jokes', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        });
+      } else {
+        alert('First, generate a joke.');
+      }
+    } catch (err) {
+      alert('Unable to save joke.');
     }
   };
 
   useEffect(() => {
     generateJoke();
   }, [generating]);
+
   return (
     <ContentWrapper>
       <Title>Markov Dad Joke Generator</Title>
@@ -98,7 +121,7 @@ const JokeGenerator = () => {
         >
           Generate Joke
         </GenerateButton>
-        <SaveButton>Save Joke</SaveButton>
+        <SaveButton onClick={saveJoke}>Save Joke</SaveButton>
       </Buttons>
     </ContentWrapper>
   );
