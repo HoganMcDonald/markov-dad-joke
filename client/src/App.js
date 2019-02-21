@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import styled, { ThemeProvider } from 'styled-components';
+import { ThemeProvider } from 'styled-components';
 import Typography from 'typography';
 import { TypographyStyle, GoogleFont } from 'react-typography';
 
 import { theme } from './styles/theme';
+import Layout from './components/Layout';
 
 class App extends Component {
   state = {
@@ -44,7 +45,7 @@ class App extends Component {
         <>
           <TypographyStyle typography={typography} />
           <GoogleFont typography={typography} />
-          <main />
+          <Layout />
         </>
       </ThemeProvider>
     );

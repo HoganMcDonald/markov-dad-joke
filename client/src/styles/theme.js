@@ -17,7 +17,7 @@ export const theme = {
     seafoam: '#95e6cb',
     magenta: '#c678dd'
   },
-  easing: 'ease-in-out',
+  breakpoint: '768px',
   transition: 'all 150ms ease-in-out',
   type: {
     baseFontSize: '16px',
