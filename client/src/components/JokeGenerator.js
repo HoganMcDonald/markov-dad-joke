@@ -67,10 +67,12 @@ const JokeGenerator = () => {
   const [generating, setGenerating] = useState(false);
 
   const generateJoke = async () => {
-    const result = await fetch('/api/generate_joke');
-    const joke = await result.json();
-    setData(joke);
-    setGenerating(false);
+    if (generating) {
+      const result = await fetch('/api/generate_joke');
+      const joke = await result.json();
+      setData(joke);
+      setGenerating(false);
+    }
   };
 
   useEffect(() => {
