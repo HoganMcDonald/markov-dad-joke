@@ -10,7 +10,7 @@ const Main = styled.main`
 
   @media (max-width: ${({ theme }) => theme.breakpoint}) {
     grid-template-columns: 1fr;
-    grid-template-rows: 90vh 90vh;
+    grid-template-rows: minmax(90vh, max-content) 90vh;
   }
 `;
 

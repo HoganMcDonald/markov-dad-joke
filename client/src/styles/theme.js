@@ -22,7 +22,7 @@ export const theme = {
   type: {
     baseFontSize: '16px',
     baseLineHeight: 1.666,
-    scaleRatio: 3.6,
+    scaleRatio: 2.4,
     headerFontFamily: [
       'Fira Mono',
       'Lucida Console',

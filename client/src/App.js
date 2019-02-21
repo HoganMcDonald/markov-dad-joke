@@ -5,6 +5,7 @@ import { TypographyStyle, GoogleFont } from 'react-typography';
 
 import { theme } from './styles/theme';
 import Layout from './components/Layout';
+import JokeGenerator from './components/JokeGenerator';
 
 class App extends Component {
   state = {
@@ -20,11 +21,11 @@ class App extends Component {
   }
 
   updateType = () => {
-    if (window.matchMedia('(max-width: 1000px)').matches) {
+    if (window.matchMedia('(max-width: 768px)').matches) {
       this.setState({
         type: {
           ...this.state.type,
-          scaleRatio: 2.6
+          scaleRatio: 1.8
         }
       });
     } else {
@@ -45,7 +46,9 @@ class App extends Component {
         <>
           <TypographyStyle typography={typography} />
           <GoogleFont typography={typography} />
-          <Layout />
+          <Layout>
+            <JokeGenerator />
+          </Layout>
         </>
       </ThemeProvider>
     );
